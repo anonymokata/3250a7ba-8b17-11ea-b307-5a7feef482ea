@@ -25,3 +25,14 @@ class TestWordSearch():
         ]
         result = handle_lists(word, data)
         assert result == True
+
+    def test_word_not_present(self):
+        word = 'nothing'
+        data = [
+            ['d', 't', 'a', 'd'],
+            ['a', 't', 'a', 'd'],
+            ['t', 't', 'a', 'd'],
+            ['a', 't', 'a', 'd'],
+        ]
+        result = handle_lists(word, data)
+        assert result == False
