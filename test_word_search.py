@@ -36,3 +36,14 @@ class TestWordSearch():
         ]
         result = handle_lists(word, data)
         assert result == False
+
+    def test_multiple_name_checks(self):
+        names = ['data', 'rat']
+        data = [
+            ['d', 't', 'a', 'd'],
+            ['a', 't', 'a', 'd'],
+            ['t', 't', 'a', 'd'],
+            ['a', 't', 'a', 'd'],
+        ]
+        result = get_names(names, data)
+        assert result == names[0]
