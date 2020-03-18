@@ -1,8 +1,7 @@
 
 
 def is_present(word, data):
-    result = word in ''.join(data)
-    if result:
-        return result
+    forward = word in ''.join(data)
     data.reverse()
-    return word in ''.join(data)
+    backward = word in ''.join(data)
+    return forward or backward
