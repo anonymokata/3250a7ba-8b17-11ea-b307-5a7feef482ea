@@ -8,13 +8,11 @@ def is_present(word, data):
 
 
 def handle_lists(word, lines):
-    if check_lists(word, lines):
-        return True
     vertical_lines = []
     for i in range(0, len(lines)):
         vertical_lines.append([val[i] for val in lines])
-    if check_lists(word, vertical_lines):
-        return True
+    return any([check_lists(word, vals) for vals in (lines, vertical_lines)])
+
 
 def check_lists(word, lines):
     for line in lines:
