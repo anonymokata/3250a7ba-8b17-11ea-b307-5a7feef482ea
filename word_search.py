@@ -7,14 +7,17 @@ def is_present(word, data):
     return forward or backward
 
 
-def handle_lists(word, list_of_lists):
-    for lst in list_of_lists:
-        if is_present(word, lst):
-            return True
-    data = []
-    for i in range(0, len(list_of_lists)):
-        data.append([val[i] for val in list_of_lists])
-    for lst in data:
-        if is_present(word, lst):
+def handle_lists(word, lines):
+    if check_lists(word, lines):
+        return True
+    vertical_lines = []
+    for i in range(0, len(lines)):
+        vertical_lines.append([val[i] for val in lines])
+    if check_lists(word, vertical_lines):
+        return True
+
+def check_lists(word, lines):
+    for line in lines:
+        if is_present(word, line):
             return True
 
