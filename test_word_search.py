@@ -14,3 +14,14 @@ class TestWordSearch():
         data = ['a', 't', 'a', 'd']
         result = is_present(word, data)
         assert result == True
+
+    def test_word_found_going_down(self):
+        word= 'data'
+        data = [
+            ['d', 't', 'a', 'd'],
+            ['a', 't', 'a', 'd'],
+            ['t', 't', 'a', 'd'],
+            ['a', 't', 'a', 'd'],
+        ]
+        result = is_present(word, data)
+        assert result == True
