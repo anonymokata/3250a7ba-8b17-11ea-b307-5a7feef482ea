@@ -1,4 +1,4 @@
-from word_search import is_present, handle_lists
+from word_search import is_present, handle_lists, get_names
 
 
 class TestWordSearch():
@@ -39,11 +39,6 @@ class TestWordSearch():
 
     def test_multiple_name_checks(self):
         names = ['data', 'rat']
-        data = [
-            ['d', 't', 'a', 'd'],
-            ['a', 't', 'a', 'd'],
-            ['t', 't', 'a', 'd'],
-            ['a', 't', 'a', 'd'],
-        ]
+        data = [['d', 'a', 't', 'a']]
         result = get_names(names, data)
-        assert result == names[0]
+        assert result[0] == names[0]

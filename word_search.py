@@ -9,8 +9,9 @@ def is_present(word, data):
 
 def handle_lists(word, lines):
     vertical_lines = []
-    for i in range(0, len(lines)):
-        vertical_lines.append([val[i] for val in lines])
+    if len(lines) > 1:
+        for i in range(0, len(lines)):
+            vertical_lines.append([val[i] for val in lines])
     return any([check_lists(word, vals) for vals in (lines, vertical_lines)])
 
 
@@ -19,3 +20,10 @@ def check_lists(word, lines):
         if is_present(word, line):
             return True
 
+
+def get_names(names, lines):
+    result = []
+    for name in names:
+        if handle_lists(name, lines):
+            result.append(name)
+    return result
