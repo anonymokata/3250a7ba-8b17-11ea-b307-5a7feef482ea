@@ -1,4 +1,4 @@
-from word_search import is_present, handle_lists, get_names
+from word_search import is_present, handle_lists, get_names, get_coordinates
 
 
 class TestWordSearch():
@@ -44,7 +44,7 @@ class TestWordSearch():
         assert result[0] == names[0]
 
     def test_get_coordinates(self):
-        names = 'data'
-        data = ['d', 'a', 't', 'a']
-        result = get_coordinates(names, line)
-        assert result['data'] == names['data']
+        name = 'data'
+        line = ['d', 'a', 't', 'a']
+        result = get_coordinates(name, line)
+        assert result['data'] == [0, 1, 2, 3]

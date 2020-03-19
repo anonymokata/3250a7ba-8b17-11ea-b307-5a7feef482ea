@@ -30,7 +30,6 @@ def get_names(names, lines):
 
 
 def get_coordinates(name, line):
-    print(line)
-    print(''.join(line))
-    print(''.join(line).find(name))
-    return None
+    start = ''.join(line).find(name)
+    return {name: [i for i in range(start, len(name))]}
+
