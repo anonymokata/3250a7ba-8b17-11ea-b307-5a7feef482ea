@@ -48,3 +48,14 @@ class TestWordSearch():
         lines = [['d', 'a', 't', 'a']]
         result = get_coordinates(name, lines)
         assert result['data'] == [(0, 0), (0, 1), (0, 2), (0, 3)]
+
+    def test_get_coordinates_multiple_lines(self):
+        name = 'data'
+        lines = [
+            ['d', 't', 'a', 'd'],
+            ['a', 't', 'a', 'd'],
+            ['t', 't', 'a', 'd'],
+            ['a', 't', 'a', 'd'],
+        ]
+        result = get_coordinates(name, lines)
+        assert result['data'] == False
