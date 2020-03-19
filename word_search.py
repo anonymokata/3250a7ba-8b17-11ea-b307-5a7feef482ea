@@ -27,3 +27,10 @@ def get_names(names, lines):
         if handle_lists(name, lines):
             result.append(name)
     return result
+
+
+def get_coordinates(name, line):
+    print(line)
+    print(''.join(line))
+    print(''.join(line).find(name))
+    return None
