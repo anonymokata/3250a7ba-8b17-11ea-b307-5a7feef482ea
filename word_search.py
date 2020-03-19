@@ -29,7 +29,9 @@ def get_names(names, lines):
     return result
 
 
-def get_coordinates(name, line):
-    start = ''.join(line).find(name)
-    return {name: [i for i in range(start, len(name))]}
-
+def get_coordinates(name, lines):
+    if handle_lists(name, lines):
+        for key, line in enumerate(lines):
+            start = ''.join(line).find(name)
+            start = start if start > 0 else 0
+            return {name: [(key, i) for i in range(start, len(name))]}

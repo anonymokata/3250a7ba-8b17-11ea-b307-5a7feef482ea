@@ -45,6 +45,6 @@ class TestWordSearch():
 
     def test_get_coordinates(self):
         name = 'data'
-        line = ['d', 'a', 't', 'a']
-        result = get_coordinates(name, line)
-        assert result['data'] == [0, 1, 2, 3]
+        lines = [['d', 'a', 't', 'a']]
+        result = get_coordinates(name, lines)
+        assert result['data'] == [(0, 0), (0, 1), (0, 2), (0, 3)]
