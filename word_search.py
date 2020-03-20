@@ -35,3 +35,10 @@ def get_coordinates(name, lines):
             start = ''.join(line).find(name)
             start = start if start > 0 else 0
             return {name: [(key, i) for i in range(start, len(name))]}
+
+def word_search(data):
+    result = {}
+    for name in data[0]:
+        for line in data[1:]:
+            if is_present(name, line):
+                print('here')
