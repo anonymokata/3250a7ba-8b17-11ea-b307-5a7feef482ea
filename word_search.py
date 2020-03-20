@@ -41,15 +41,21 @@ def word_search(data):
     result = {}
     for name in data[0]:
         for count, line in enumerate(data[1:]):
-            if name in ''.join(line):
-                start = ''.join(line).find(name)
-                coordinates = [(i, count) for i in range(start, start + len(name))]
+            coordinates = _get_coordinates(name, line, count)
+            if coordinates:
                 result[name] = coordinates
             reverse_name = list(name)
             reverse_name.reverse()
-            if ''.join(reverse_name) in ''.join(line):
-                start = ''.join(''.join(line)).find(''.join(reverse_name))
-                coordinates = [(i, count) for i in range(start, start + len(reverse_name))]
-                coordinates.reverse()
+            reverse_name = ''.join(reverse_name)
+            coordinates = _get_coordinates(reverse_name, line, count)
+            coordinates.reverse()
+            if coordinates:
                 result[name] = coordinates
     return result
+
+def _get_coordinates(name, line, count):
+    coordinates = []
+    if name in ''.join(line):
+        start = ''.join(line).find(name)
+        coordinates = [(i, count) for i in range(start, start + len(name))]
+    return coordinates
