@@ -50,8 +50,19 @@ class TestWordSearch():
         assert result['data'] == [(0, 0), (0, 1), (0, 2), (0, 3)]
 
     def test_x(self):
-        data = [
-            ["BONES", "KHAN", "KIRK", "SCOTTY", "SPOCK", "SULU", "UHURA"],
+        new_data = self.data().copy()
+        new_data.insert(0, ["SCOTTY"])
+        result = word_search(new_data)
+        expected = {
+            'SCOTTY': [(0, 5), (1, 5), (2, 5), (3, 5), (4, 5), (5, 5)],
+        }
+        assert result == expected
+
+    def names(self):
+        return ["BONES", "KHAN", "KIRK", "SCOTTY", "SPOCK", "SULU", "UHURA"]
+
+    def data(self):
+        return [
             ["U", "M", "K", "H", "U", "L", "K", "I", "N", "V", "J", "O", "C", "W", "E"],
             ["L", "L", "S", "H", "K", "Z", "Z", "W", "Z", "C", "G", "J", "U", "Y", "G"],
             ["H", "S", "U", "P", "J", "P", "R", "J", "D", "H", "S", "B", "X", "T", "G"],
@@ -68,9 +79,3 @@ class TestWordSearch():
             ["W", "Z", "M", "I", "S", "U", "K", "U", "R", "B", "I", "D", "U", "X", "S"],
             ["K", "Y", "L", "B", "Q", "Q", "P", "M", "D", "F", "C", "K", "E", "A", "B"],
         ]
-        result = word_search(data)
-        expected = {
-            'SCOTTY': [(0, 5), (1, 5), (2, 5), (3, 5), (4, 5), (5, 5)],
-        }
-        assert result == expected
-
