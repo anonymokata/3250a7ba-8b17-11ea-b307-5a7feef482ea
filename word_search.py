@@ -41,17 +41,15 @@ def word_search(data):
     result = {}
     for name in data[0]:
         for count, line in enumerate(data[1:]):
-            forward = ''.join(line)
-            if name in forward:
+            if name in ''.join(line):
                 start = ''.join(line).find(name)
-                x = [(i, count) for i in range(start, start + len(name))]
-                result[name] = x
-            backward_name = list(name)
-            backward_name.reverse()
-            if ''.join(backward_name) in forward:
-                start = ''.join(''.join(line)).find(''.join(backward_name))
-                x = [(i, count) for i in range(start, start + len(backward_name))]
-                x.reverse()
-                result[name] = x
-    print(result)
+                coordinates = [(i, count) for i in range(start, start + len(name))]
+                result[name] = coordinates
+            reverse_name = list(name)
+            reverse_name.reverse()
+            if ''.join(reverse_name) in ''.join(line):
+                start = ''.join(''.join(line)).find(''.join(reverse_name))
+                coordinates = [(i, count) for i in range(start, start + len(reverse_name))]
+                coordinates.reverse()
+                result[name] = coordinates
     return result
