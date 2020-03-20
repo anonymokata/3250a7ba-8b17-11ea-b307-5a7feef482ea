@@ -68,6 +68,17 @@ class TestWordSearch():
         }
         assert result == expected
 
+    def test_find_horizontally_reversed(self):
+        new_data = self.data().copy()
+        new_data.insert(0, ["SCOTTY", "KIRK", "BONES"])
+        result = word_search(new_data)
+        expected = {
+            'SCOTTY': [(0, 5), (1, 5), (2, 5), (3, 5), (4, 5), (5, 5)],
+            'KIRK': [(4, 7), (3, 7), (2, 7),(1, 7)],
+            'BONES': [(0, 6),(0, 7),(0, 8),(0, 9),(0, 10)],
+        }
+        assert result == expected
+
     def names(self):
         return ["BONES", "KHAN", "KIRK", "SCOTTY", "SPOCK", "SULU", "UHURA"]
 
