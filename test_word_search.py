@@ -49,12 +49,22 @@ class TestWordSearch():
         result = get_coordinates(name, lines)
         assert result['data'] == [(0, 0), (0, 1), (0, 2), (0, 3)]
 
-    def test_x(self):
+    def test_find_horizontally(self):
         new_data = self.data().copy()
         new_data.insert(0, ["SCOTTY"])
         result = word_search(new_data)
         expected = {
             'SCOTTY': [(0, 5), (1, 5), (2, 5), (3, 5), (4, 5), (5, 5)],
+        }
+        assert result == expected
+
+    def test_find_horizontally_reversed(self):
+        new_data = self.data().copy()
+        new_data.insert(0, ["SCOTTY", "KIRK"])
+        result = word_search(new_data)
+        expected = {
+            'SCOTTY': [(0, 5), (1, 5), (2, 5), (3, 5), (4, 5), (5, 5)],
+            'KIRK': [(4, 7), (3, 7), (2, 7),(1, 7)],
         }
         assert result == expected
 
