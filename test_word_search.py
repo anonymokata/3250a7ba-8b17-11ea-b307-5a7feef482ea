@@ -51,7 +51,7 @@ class TestWordSearch():
 
     def test_x(self):
         data = [
-            ["BONES,KHAN,KIRK,SCOTTY,SPOCK,SULU,UHURA"],
+            ["BONES", "KHAN", "KIRK", "SCOTTY", "SPOCK", "SULU", "UHURA"],
             ["U", "M", "K", "H", "U", "L", "K", "I", "N", "V", "J", "O", "C", "W", "E"],
             ["L", "L", "S", "H", "K", "Z", "Z", "W", "Z", "C", "G", "J", "U", "Y", "G"],
             ["H", "S", "U", "P", "J", "P", "R", "J", "D", "H", "S", "B", "X", "T", "G"],
@@ -69,6 +69,8 @@ class TestWordSearch():
             ["K", "Y", "L", "B", "Q", "Q", "P", "M", "D", "F", "C", "K", "E", "A", "B"],
         ]
         result = word_search(data)
-        expected = {'SCOTTY': [(0,5),(1,5),(2,5),(3,5),(4,5),(5,5)]}
+        expected = {
+            'SCOTTY': [(0, 5), (1, 5), (2, 5), (3, 5), (4, 5), (5, 5)],
+        }
         assert result == expected
 
