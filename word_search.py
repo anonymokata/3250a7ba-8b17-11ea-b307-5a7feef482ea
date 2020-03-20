@@ -40,18 +40,23 @@ def get_coordinates(name, lines):
 def word_search(data):
     result = {}
     for name in data[0]:
+        result[name] = []
         for count, line in enumerate(data[1:]):
-            coordinates = _get_coordinates(name, line, count)
-            if coordinates:
-                result[name] = coordinates
-            reverse_name = list(name)
-            reverse_name.reverse()
-            reverse_name = ''.join(reverse_name)
-            coordinates = _get_coordinates(reverse_name, line, count)
-            coordinates.reverse()
-            if coordinates:
-                result[name] = coordinates
+            result = get_name_and_coordinates(result, name, line, count)
     return result
+
+def get_name_and_coordinates(result, name, line, count):
+    coordinates = _get_coordinates(name, line, count)
+    reverse_coordinates = _get_coordinates(get_reverse_name(name), line, count)
+    result[name].extend(coordinates)
+    reverse_coordinates.reverse()
+    result[name].extend(reverse_coordinates)
+    return result
+
+def get_reverse_name(name):
+    reverse_name = list(name)
+    reverse_name.reverse()
+    return ''.join(reverse_name)
 
 def _get_coordinates(name, line, count):
     coordinates = []
