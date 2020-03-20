@@ -44,6 +44,8 @@ def word_search(data):
         result[name] = []
         for count, line in enumerate(data[1:]):
             result = get_name_and_coordinates(result, name, line, count)
+            if result[name]:
+                break
         for count, line in enumerate(rotated_lines):
             result = get_name_and_coordinates(result, name, line, count, rotate=True)
     return result
