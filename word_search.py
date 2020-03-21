@@ -48,6 +48,8 @@ def word_search(data):
                 break
         for count, line in enumerate(rotated_lines):
             result = get_name_and_coordinates(result, name, line, count, rotate=True)
+            if result[name]:
+                break
     return result
 
 def get_name_and_coordinates(result, name, line, count, rotate=False):
