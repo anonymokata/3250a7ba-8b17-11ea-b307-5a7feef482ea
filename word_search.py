@@ -42,15 +42,17 @@ def word_search(data):
     rotated_lines = rotate_lines(data[1:])
     for name in data[0]:
         result[name] = []
-        for count, line in enumerate(data[1:]):
-            result = get_name_and_coordinates(result, name, line, count)
-            if result[name]:
-                break
-        for count, line in enumerate(rotated_lines):
-            result = get_name_and_coordinates(result, name, line, count, rotate=True)
-            if result[name]:
-                break
+        result = find_word(data[1:], name, result)
+        result = find_word(rotated_lines, name, result, rotate=True)
     return result
+
+def find_word(data, name, result, rotate=False):
+    for count, line in enumerate(data):
+        result = get_name_and_coordinates(result, name, line, count, rotate=rotate)
+        if result[name]:
+            return result
+    return result
+
 
 def get_name_and_coordinates(result, name, line, count, rotate=False):
     coordinates = _get_coordinates(name, line, count, rotate=rotate)
