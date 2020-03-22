@@ -1,4 +1,4 @@
-
+import numpy
 
 def is_present(word, data):
     forward = word in ''.join(data)
@@ -46,6 +46,7 @@ def word_search(data):
         result = find_word(rotated_lines, name, result, rotate=True)
     return result
 
+
 def find_word(data, name, result, rotate=False):
     for count, line in enumerate(data):
         result = get_name_and_coordinates(result, name, line, count, rotate=rotate)
@@ -62,6 +63,7 @@ def get_name_and_coordinates(result, name, line, count, rotate=False):
     result[name].extend(reverse_coordinates)
     return result
 
+
 def rotate_lines(lines):
     result = []
     for i in range(len(lines[0])):
@@ -69,10 +71,12 @@ def rotate_lines(lines):
         result.append(x)
     return result
 
+
 def get_reverse_name(name):
     reverse_name = list(name)
     reverse_name.reverse()
     return ''.join(reverse_name)
+
 
 def _get_coordinates(name, line, count, rotate=False):
     coordinates = []
@@ -83,3 +87,15 @@ def _get_coordinates(name, line, count, rotate=False):
         else:
             coordinates = [(i, count) for i in range(start, start + len(name))]
     return coordinates
+
+
+def d(lines):
+    matrix = numpy.array(lines)
+    shape = matrix.shape[0]
+    left_to_right = [numpy.diag(matrix, k=i).tolist() for i in range(-shape + 1, shape)]
+    matrix = numpy.flipud(matrix)
+    right_to_left = [numpy.diag(matrix, k=i).tolist() for i in range(-shape + 1, shape)]
+    x =  right_to_left + left_to_right
+    print(x)
+    return x
+
