@@ -47,11 +47,25 @@ def word_search(data):
     return result
 
 
-def find_word(data, name, result, rotate=False):
-    for count, line in enumerate(data):
+def find_word(lines, name, result, rotate=False):
+    for count, line in enumerate(lines):
         result = get_name_and_coordinates(result, name, line, count, rotate=rotate)
         if result[name]:
             return result
+    diagonals = get_diagonals(lines)
+    for diagonal in diagonals:
+        for count_l, line in enumerate(diagonal):
+            x = _get_coordinates(name, line, count_l)
+            if x and x[0][1] < 15:
+                length = len(lines[0])
+                column = length - x[0][1]
+                row = x[0][0]
+                xx = [i for i in range(column, column + len(name))]
+                yy = [i for i in range(row, column + len(name))]
+                zz = []
+                for num in range(0, len(name)):
+                    zz.append((xx[num], yy[num]))
+                result[name] = zz
     return result
 
 
@@ -78,7 +92,7 @@ def get_reverse_name(name):
     return ''.join(reverse_name)
 
 
-def _get_coordinates(name, line, count, rotate=False):
+def _get_coordinates(name, line, count, rotate=False, diagonal=False):
     coordinates = []
     if name in ''.join(line):
         start = ''.join(line).find(name)
@@ -89,13 +103,10 @@ def _get_coordinates(name, line, count, rotate=False):
     return coordinates
 
 
-def d(lines):
+def get_diagonals(lines):
     matrix = numpy.array(lines)
     shape = matrix.shape[0]
     left_to_right = [numpy.diag(matrix, k=i).tolist() for i in range(-shape + 1, shape)]
     matrix = numpy.flipud(matrix)
     right_to_left = [numpy.diag(matrix, k=i).tolist() for i in range(-shape + 1, shape)]
-    x =  right_to_left + left_to_right
-    print(x)
-    return x
-
+    return [right_to_left, left_to_right]

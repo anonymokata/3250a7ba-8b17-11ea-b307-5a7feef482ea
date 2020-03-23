@@ -1,4 +1,4 @@
-from word_search import is_present, handle_lists, get_names, get_coordinates, word_search, d
+from word_search import is_present, handle_lists, get_names, get_coordinates, word_search, get_diagonals
 from unittest import TestCase
 
 
@@ -92,26 +92,44 @@ class TestWordSearch(TestCase):
         }
         assert result == expected
 
-    def test_x(self):
+    def test_get_diagonals(self):
         data = [
             ['A', '1', 'X'],
             ['B', '2', 'Y'],
             ['C', '3', 'Z']
         ]
-        expected = [
-            ['X'],
-            ['1', 'Y'],
-            ['A', '2', 'Z'],
-            ['B', '3'],
-            ['C'],
-            ['A'],
-            ['B', '1'],
-            ['C', '2', 'X'],
-            ['3', 'Y'],
-            ['Z'],
+        expected_1 = [
+                ['X'],
+                ['1', 'Y'],
+                ['A', '2', 'Z'],
+                ['B', '3'],
+                ['C'],
         ]
-        result = d(data)
-        self.assertCountEqual(result, expected)
+        expected_2 = [
+                ['A'],
+                ['B', '1'],
+                ['C', '2', 'X'],
+                ['3', 'Y'],
+                ['Z'],
+        ]
+        diagonals = get_diagonals(data)
+        result = {x[0][0]: x for x in diagonals}
+        self.assertCountEqual(result['C'], expected_1)
+        self.assertCountEqual(result['A'], expected_2)
+
+    def test_find_spock(self):
+        new_data = self.data().copy()
+        new_data.insert(0, ["SCOTTY", "KIRK", "BONES", "KHAN", "SPOCK"])
+        result = word_search(new_data)
+        expected = {
+            'SCOTTY': [(0, 5), (1, 5), (2, 5), (3, 5), (4, 5), (5, 5)],
+            'KIRK': [(4, 7), (3, 7), (2, 7),(1, 7)],
+            'BONES': [(0, 6),(0, 7),(0, 8),(0, 9),(0, 10)],
+            'KHAN': [(5, 9), (5, 8),(5, 7), (5, 6)],
+            'SPOCK': [(2, 1), (3, 2), (4, 3), (5, 4), (6, 5)],
+        }
+        print(result)
+        assert result == expected
 
     def names(self):
         return ["BONES", "KHAN", "KIRK", "SCOTTY", "SPOCK", "SULU", "UHURA"]
