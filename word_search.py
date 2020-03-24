@@ -64,12 +64,18 @@ def _get_diagonals(name, lines, result):
                 if count_l > len(line[0]):
                     start_column = count_l - (len(lines) - 1)
                 else:
-                    start_column = count_l
+                    start_column = count_l + len(lines)
                 start = ''.join(line).find(name)
                 real_start = start_column + start
-                beginning_of_word = (real_start, start)
-                coordinates = [(beginning_of_word[0] + i, beginning_of_word[1] + i) for i in range(len(name))]
-                result[name] = coordinates
+                if real_start < 0:
+                    real_start = (len(lines) - 1) + real_start
+                    beginning_of_word = (real_start, start)
+                    coordinates = [(beginning_of_word[0] - i, beginning_of_word[1] + i) for i in range(len(name))]
+                    result[name] = coordinates
+                else:
+                    beginning_of_word = (real_start, start)
+                    coordinates = [(beginning_of_word[0] + i, beginning_of_word[1] + i) for i in range(len(name))]
+                    result[name] = coordinates
                 return result
     return result
 
