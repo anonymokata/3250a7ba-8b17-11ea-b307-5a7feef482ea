@@ -144,6 +144,30 @@ class TestWordSearch(TestCase):
         }
         assert result == expected
 
+    def test_find_riker(self):
+        new_data = [
+            ['X', 'X', 'X', 'X', 'X', 'X', 'X'],
+            ['X', 'X', 'R', 'X', 'X', 'X', 'X'],
+            ['X', 'X', 'X', 'I', 'X', 'X', 'X'],
+            ['X', 'X', 'X', 'X', 'K', 'X', 'X'],
+            ['X', 'X', 'X', 'X', 'X', 'E', 'X'],
+            ['X', 'X', 'X', 'X', 'X', 'X', 'R'],
+            ['X', 'X', 'X', 'X', 'X', 'X', 'X'],
+            ['X', 'X', 'X', 'X', 'X', 'X', 'X'],
+        ]
+        new_data.insert(0, ["SCOTTY", "KIRK", "BONES", "KHAN", "SPOCK", "UHURA", 'RIKER'])
+        result = word_search(new_data)
+        expected = {
+            'SCOTTY': [],
+            'KIRK': [],
+            'BONES': [],
+            'KHAN': [],
+            'SPOCK': [],
+            'UHURA': [],
+            'RIKER': [(2, 1), (3, 2), (4, 3), (5, 4), (6, 5)]
+        }
+        assert result == expected
+
     def names(self):
         return ["BONES", "KHAN", "KIRK", "SCOTTY", "SPOCK", "SULU", "UHURA"]
 
