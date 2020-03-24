@@ -128,7 +128,20 @@ class TestWordSearch(TestCase):
             'KHAN': [(5, 9), (5, 8),(5, 7), (5, 6)],
             'SPOCK': [(2, 1), (3, 2), (4, 3), (5, 4), (6, 5)],
         }
-        print(result)
+        assert result == expected
+
+    def test_find_uhura(self):
+        new_data = self.data().copy()
+        new_data.insert(0, ["SCOTTY", "KIRK", "BONES", "KHAN", "SPOCK", "UHURA"])
+        result = word_search(new_data)
+        expected = {
+            'SCOTTY': [(0, 5), (1, 5), (2, 5), (3, 5), (4, 5), (5, 5)],
+            'KIRK': [(4, 7), (3, 7), (2, 7),(1, 7)],
+            'BONES': [(0, 6),(0, 7),(0, 8),(0, 9),(0, 10)],
+            'KHAN': [(5, 9), (5, 8),(5, 7), (5, 6)],
+            'SPOCK': [(2, 1), (3, 2), (4, 3), (5, 4), (6, 5)],
+            'UHURA': [(4, 0), (3, 1), (2, 2), (1, 3), (0, 4)],
+        }
         assert result == expected
 
     def names(self):

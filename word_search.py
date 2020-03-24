@@ -52,20 +52,25 @@ def find_word(lines, name, result, rotate=False):
         result = get_name_and_coordinates(result, name, line, count, rotate=rotate)
         if result[name]:
             return result
+        result = _get_diagonals(name, lines, result)
+    return result
+
+def _get_diagonals(name, lines, result):
     diagonals = get_diagonals(lines)
     for diagonal in diagonals:
         for count_l, line in enumerate(diagonal):
             x = _get_coordinates(name, line, count_l)
-            if x and x[0][1] < 15:
-                length = len(lines[0])
-                column = length - x[0][1]
-                row = x[0][0]
-                xx = [i for i in range(column, column + len(name))]
-                yy = [i for i in range(row, column + len(name))]
-                zz = []
-                for num in range(0, len(name)):
-                    zz.append((xx[num], yy[num]))
-                result[name] = zz
+            if name in ''.join(line):
+                if count_l > len(line[0]):
+                    start_column = count_l - (len(lines) - 1)
+                else:
+                    start_column = count_l
+                start = ''.join(line).find(name)
+                real_start = start_column + start
+                beginning_of_word = (real_start, start)
+                coordinates = [(beginning_of_word[0] + i, beginning_of_word[1] + i) for i in range(len(name))]
+                result[name] = coordinates
+                return result
     return result
 
 
