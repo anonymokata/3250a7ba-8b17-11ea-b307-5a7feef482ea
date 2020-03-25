@@ -1,4 +1,4 @@
-from word_search import is_present, handle_lists, get_names, get_coordinates, word_search, get_diagonals
+from word_search import is_present, handle_lists, get_names, get_coordinates, word_search, get_diagonals, new_word_search
 from unittest import TestCase
 
 
@@ -54,6 +54,15 @@ class TestWordSearch(TestCase):
         new_data = self.data().copy()
         new_data.insert(0, ["SCOTTY"])
         result = word_search(new_data)
+        expected = {
+            'SCOTTY': [(0, 5), (1, 5), (2, 5), (3, 5), (4, 5), (5, 5)],
+        }
+        assert result == expected
+
+    def test_find_horizontally_new_word(self):
+        new_data = self.data().copy()
+        new_data.insert(0, ["SCOTTY"])
+        result = new_word_search(new_data)
         expected = {
             'SCOTTY': [(0, 5), (1, 5), (2, 5), (3, 5), (4, 5), (5, 5)],
         }
@@ -151,6 +160,30 @@ class TestWordSearch(TestCase):
             ['X', 'X', 'X', 'I', 'X', 'X', 'X'],
             ['X', 'X', 'X', 'X', 'K', 'X', 'X'],
             ['X', 'X', 'X', 'X', 'X', 'E', 'X'],
+            ['X', 'X', 'X', 'X', 'X', 'X', 'R'],
+            ['X', 'X', 'X', 'X', 'X', 'X', 'X'],
+            ['X', 'X', 'X', 'X', 'X', 'X', 'X'],
+        ]
+        new_data.insert(0, ["SCOTTY", "KIRK", "BONES", "KHAN", "SPOCK", "UHURA", 'RIKER'])
+        result = word_search(new_data)
+        expected = {
+            'SCOTTY': [],
+            'KIRK': [],
+            'BONES': [],
+            'KHAN': [],
+            'SPOCK': [],
+            'UHURA': [],
+            'RIKER': [(2, 1), (3, 2), (4, 3), (5, 4), (6, 5)]
+        }
+        assert result == expected
+
+    def test_find_reverse_riker(self):
+        new_data = [
+            ['X', 'X', 'X', 'X', 'X', 'X', 'X'],
+            ['X', 'X', 'R', 'X', 'X', 'X', 'X'],
+            ['X', 'X', 'X', 'E', 'X', 'X', 'X'],
+            ['X', 'X', 'X', 'X', 'K', 'X', 'X'],
+            ['X', 'X', 'X', 'X', 'X', 'I', 'X'],
             ['X', 'X', 'X', 'X', 'X', 'X', 'R'],
             ['X', 'X', 'X', 'X', 'X', 'X', 'X'],
             ['X', 'X', 'X', 'X', 'X', 'X', 'X'],
