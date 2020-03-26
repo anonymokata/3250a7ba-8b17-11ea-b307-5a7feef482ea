@@ -2,7 +2,7 @@
 
 def word_search(data):
     names = data[0]
-    final = {name: None for name in names}
+    final = {name: [] for name in names}
     lines = data[1:]
     first = []
     for name in names:
