@@ -61,7 +61,7 @@ class TestWordSearch(TestCase):
 
     def test_find_horizontally_new_word(self):
         new_data = self.data().copy()
-        new_data.insert(0, ["SCOTTY"])
+        new_data.insert(0, ["SCOTTY", "SULU"])
         result = new_word_search(new_data)
         expected = {
             'SCOTTY': [(0, 5), (1, 5), (2, 5), (3, 5), (4, 5), (5, 5)],

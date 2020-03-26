@@ -125,75 +125,53 @@ def get_diagonals(lines):
 
 def new_word_search(data):
     names = data[0]
+    final = {name: None for name in names}
     lines = data[1:]
-    result = {name: {letter: [] for letter in name} for name in names}
-    answers = []
+    first = []
     for name in names:
-        for key, line in enumerate(lines):
-            for index, letter in enumerate(line):
-                if letter in name:
-                    result[name][letter].append((index, key))
-    x = {letter: [] for letter in name}
-    for key, val in result.items():
-        for index, letter in enumerate(name):
-            for c in val[letter]:
-                try:
-                    for i in val[name[index + 1]]:
-                        if ((c[0] - i[0])**2 + (c[1] - i[1])**2)**0.5 == 1:
-                            x[letter].append(c)
-                            x[name[index + 1]].append(i)
-                            # x.update({letter: c, name[index + 1]: i})
-                            # x.append([c, letter, i, name[index + 1]])
-                            # x.append('{} -> {} is {}->{}'.format(letter, name[index + 1], c, i))
-                except Exception:
-                    for i in val[name[index -1]]:
-                        if ((c[0] - i[0])**2 + (c[1] - i[1])**2)**0.5 == 1:
-                            # x.update({letter: c, name[index - 1]: i})
-                            x[letter].append(c)
-                            x[name[index - 1]].append(i)
-                            # x.append((i, c, letter))
-                            # x.append((c, letter, i, name[index - 1]))
-                            # x.append('{} -> {} is {}->{}'.format(letter, name[index - 1], c, i))
-    print(x[name[0]])
-    for val in x[name[0]]:
+        for y, line in enumerate(lines):
+            for x, letter in enumerate(line):
+                if letter == name[0]:
+                    first.append((x, y))
+        print(first)
+        up = []
+        down = []
+        left = []
+        right = []
+        up_right = []
+        up_left = []
+        down_right = []
+        down_left = []
+        for val in first:
+            up.append([(val[0], val[1] + i) for i in range(len(name))])
+            down.append([(val[0], val[1] - i) for i in range(len(name))])
+            right.append([(val[0] + i, val[1]) for i in range(len(name))])
+            left.append([(val[0] - i, val[1]) for i in range(len(name))])
+            up_right.append([(val[0] + i, val[1] + i) for i in range(len(name))])
+            up_left.append([(val[0] + i, val[1] - i) for i in range(len(name))])
+            down_right.append([(val[0] - i, val[1] + i) for i in range(len(name))])
+            down_left.append([(val[0] - i, val[1] - i) for i in range(len(name))])
+        x = [up, down, right, left, up_right, up_left, down_right, down_left]
+        for xx in x:
+            for yy in xx:
+                if name in _get_word(yy, lines, name):
+                    final[name] = yy
+                if name[::-1] in _get_word(yy, lines, name):
+                    yy.reverse()
+                    final[name] = yy
+    return final
 
-
-    res = []
-    #     for i in range(len(name)):
-    #         if i + 1 < len(name):
-    #             a = result[name][name[i]] + result[name][name[i + 1]]
-    #             answers.append(a)
-
-    for name, value in result.items():
-        for letter in name:
-            letter_1 = result[name][letter]
-            letter_2 = result[name][name[name.index(letter) + 1]]
-            x = []
-            for c in letter_1:
+def _get_word(coords, lines, name):
+    result = []
+    if len(coords) == len(name):
+        for coord in coords:
+            try:
+                result.append(lines[coord[1]][coord[0]])
+            except Exception:
                 pass
-                # print(name)
-                # print(letter)
-                # print(coordinates_check(c, letter_2))
-                # if (c[0] + 1, c[1]) in letter_2:
-                #     x.append((c[0] + 1, c[1]))
-                #     print(letter)
-                #     print(c)
-                #     print((c[0] + 1, c[1]))
-                # if (c[0] - 1, c[1]) in letter_2:
-                #     x.append((c[0] - 1, c[1]))
-                # if (c[0], c[1] + 1) in letter_2:
-                #     x.append((c[0], c[1] + 1))
-                # if (c[0], c[1] - 1) in letter_2:
-                #     x.append((c[0], c[1] - 1))
-                # if (c[0] + 1, c[1] + 1) in letter_2:
-                #     x.append((c[0] + 1, c[1] + 1))
-                # if (c[0] - 1, c[1] + 1) in letter_2:
-                #     x.append((c[0] - 1, c[1] + 1))
-                # if (c[0] + 1, c[1] - 1) in letter_2:
-                #     x.append((c[0] + 1, c[1] - 1))
-                # if (c[0] - 1, c[1] - 1) in letter_2:
-                #     x.append((c[0] - 1, c[1] - 1))
-            # print(x)
+        return ''.join(result)
+
+
 
 def coordinates_check(coordinate, values):
     result = []
