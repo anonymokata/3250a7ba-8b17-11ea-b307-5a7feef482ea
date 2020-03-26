@@ -73,7 +73,6 @@ class TestWordSearch(TestCase):
         }
         assert result == expected
 
-
     def test_find_reverse_riker(self):
         new_data = [
             ['X', 'X', 'X', 'X', 'X', 'X', 'X'],
