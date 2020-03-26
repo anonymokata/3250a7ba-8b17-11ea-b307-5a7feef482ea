@@ -1,60 +1,57 @@
 
+def get_lines(file_name):
+    lines = []
+    with open('data' + '/' + file_name) as f:
+        for line in f.readlines():
+            lines.append(line.strip().split(','))
+    return lines
+
 
 def word_search(data):
     names = data[0]
-    final = {name: [] for name in names}
+    result = {name: [] for name in names}
     lines = data[1:]
     first = []
     for name in names:
-        first = get_first_letters(name, lines)
-        all_combos = get_all_combos(first, name)
+        first_letters = get_first_letters(name, lines)
+        all_combos = get_all_combos(first_letters, name)
         for coordinate in all_combos:
             if name in _get_word(coordinate, lines, name):
-                final[name] = coordinate
+                result[name] = coordinate
             if name[::-1] in _get_word(coordinate, lines, name):
                 coordinate.reverse()
-                final[name] = coordinate
-    return final
-
-def get_all_combos(first, name):
-    # up = []
-    # down = []
-    # left = []
-    # right = []
-    # up_right = []
-    # up_left = []
-    # down_right = []
-    # down_left = []
-    result = []
-    for val in first:
-        result.append([(val[0], val[1] + i) for i in range(len(name))])
-        result.append([(val[0], val[1] - i) for i in range(len(name))])
-        result.append([(val[0] + i, val[1]) for i in range(len(name))])
-        result.append([(val[0] - i, val[1]) for i in range(len(name))])
-        result.append([(val[0] + i, val[1] + i) for i in range(len(name))])
-        result.append([(val[0] + i, val[1] - i) for i in range(len(name))])
-        result.append([(val[0] - i, val[1] + i) for i in range(len(name))])
-        result.append([(val[0] - i, val[1] - i) for i in range(len(name))])
-        # up.append([(val[0], val[1] + i) for i in range(len(name))])
-        # down.append([(val[0], val[1] - i) for i in range(len(name))])
-        # right.append([(val[0] + i, val[1]) for i in range(len(name))])
-        # left.append([(val[0] - i, val[1]) for i in range(len(name))])
-        # up_right.append([(val[0] + i, val[1] + i) for i in range(len(name))])
-        # up_left.append([(val[0] + i, val[1] - i) for i in range(len(name))])
-        # down_right.append([(val[0] - i, val[1] + i) for i in range(len(name))])
-        # down_left.append([(val[0] - i, val[1] - i) for i in range(len(name))])
-    # all_combos = [up, down, right, left, up_right, up_left, down_right, down_left]
-    # for x in all_combos:
-        # print(x)
+                result[name] = coordinate
     return result
+
+
+def get_all_combos(first_letters, name):
+    result = []
+    for letter in first_letters:
+        result.extend(get_eight_viable_answers(letter, name))
+    return result
+
+
+def get_eight_viable_answers(letter, name):
+    result = []
+    result.append([(letter[0], letter[1] + i) for i in range(len(name))])
+    result.append([(letter[0], letter[1] - i) for i in range(len(name))])
+    result.append([(letter[0] + i, letter[1]) for i in range(len(name))])
+    result.append([(letter[0] - i, letter[1]) for i in range(len(name))])
+    result.append([(letter[0] + i, letter[1] + i) for i in range(len(name))])
+    result.append([(letter[0] + i, letter[1] - i) for i in range(len(name))])
+    result.append([(letter[0] - i, letter[1] + i) for i in range(len(name))])
+    result.append([(letter[0] - i, letter[1] - i) for i in range(len(name))])
+    return result
+
 
 def get_first_letters(name, lines):
     first = []
-    for y, line in enumerate(lines):
-        for x, letter in enumerate(line):
+    for y_coordinate, line in enumerate(lines):
+        for x_coordinate, letter in enumerate(line):
             if letter == name[0]:
-                first.append((x, y))
+                first.append((x_coordinate, y_coordinate))
     return first
+
 
 def _get_word(coords, lines, name):
     result = []
