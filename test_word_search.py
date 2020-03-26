@@ -1,4 +1,4 @@
-from word_search import is_present, handle_lists, get_names, get_coordinates, word_search, get_diagonals, new_word_search
+from word_search import is_present, handle_lists, get_names, get_coordinates, word_search, get_diagonals
 from unittest import TestCase
 
 
@@ -59,14 +59,14 @@ class TestWordSearch(TestCase):
         }
         assert result == expected
 
-    def test_find_horizontally_new_word(self):
-        new_data = self.data().copy()
-        new_data.insert(0, ["SCOTTY", "SULU"])
-        result = new_word_search(new_data)
-        expected = {
-            'SCOTTY': [(0, 5), (1, 5), (2, 5), (3, 5), (4, 5), (5, 5)],
-        }
-        assert result == expected
+    # def test_find_horizontally_new_word(self):
+    #     new_data = self.data().copy()
+    #     new_data.insert(0, ["SCOTTY", "SULU"])
+    #     result = new_word_search(new_data)
+    #     expected = {
+    #         'SCOTTY': [(0, 5), (1, 5), (2, 5), (3, 5), (4, 5), (5, 5)],
+    #     }
+    #     assert result == expected
 
     def test_find_horizontally_reversed(self):
         new_data = self.data().copy()
@@ -150,54 +150,6 @@ class TestWordSearch(TestCase):
             'KHAN': [(5, 9), (5, 8),(5, 7), (5, 6)],
             'SPOCK': [(2, 1), (3, 2), (4, 3), (5, 4), (6, 5)],
             'UHURA': [(4, 0), (3, 1), (2, 2), (1, 3), (0, 4)],
-        }
-        assert result == expected
-
-    def test_find_riker(self):
-        new_data = [
-            ['X', 'X', 'X', 'X', 'X', 'X', 'X'],
-            ['X', 'X', 'R', 'X', 'X', 'X', 'X'],
-            ['X', 'X', 'X', 'I', 'X', 'X', 'X'],
-            ['X', 'X', 'X', 'X', 'K', 'X', 'X'],
-            ['X', 'X', 'X', 'X', 'X', 'E', 'X'],
-            ['X', 'X', 'X', 'X', 'X', 'X', 'R'],
-            ['X', 'X', 'X', 'X', 'X', 'X', 'X'],
-            ['X', 'X', 'X', 'X', 'X', 'X', 'X'],
-        ]
-        new_data.insert(0, ["SCOTTY", "KIRK", "BONES", "KHAN", "SPOCK", "UHURA", 'RIKER'])
-        result = word_search(new_data)
-        expected = {
-            'SCOTTY': [],
-            'KIRK': [],
-            'BONES': [],
-            'KHAN': [],
-            'SPOCK': [],
-            'UHURA': [],
-            'RIKER': [(2, 1), (3, 2), (4, 3), (5, 4), (6, 5)]
-        }
-        assert result == expected
-
-    def test_find_reverse_riker(self):
-        new_data = [
-            ['X', 'X', 'X', 'X', 'X', 'X', 'X'],
-            ['X', 'X', 'R', 'X', 'X', 'X', 'X'],
-            ['X', 'X', 'X', 'E', 'X', 'X', 'X'],
-            ['X', 'X', 'X', 'X', 'K', 'X', 'X'],
-            ['X', 'X', 'X', 'X', 'X', 'I', 'X'],
-            ['X', 'X', 'X', 'X', 'X', 'X', 'R'],
-            ['X', 'X', 'X', 'X', 'X', 'X', 'X'],
-            ['X', 'X', 'X', 'X', 'X', 'X', 'X'],
-        ]
-        new_data.insert(0, ["SCOTTY", "KIRK", "BONES", "KHAN", "SPOCK", "UHURA", 'RIKER'])
-        result = word_search(new_data)
-        expected = {
-            'SCOTTY': [],
-            'KIRK': [],
-            'BONES': [],
-            'KHAN': [],
-            'SPOCK': [],
-            'UHURA': [],
-            'RIKER': [(2, 1), (3, 2), (4, 3), (5, 4), (6, 5)]
         }
         assert result == expected
 

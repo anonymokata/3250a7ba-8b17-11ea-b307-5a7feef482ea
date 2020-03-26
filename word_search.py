@@ -123,7 +123,7 @@ def get_diagonals(lines):
     return [right_to_left, left_to_right]
 
 
-def new_word_search(data):
+def word_search(data):
     names = data[0]
     final = {name: None for name in names}
     lines = data[1:]
