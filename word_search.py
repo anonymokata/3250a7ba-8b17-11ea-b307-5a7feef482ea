@@ -10,7 +10,6 @@ def get_lines(file_name):
 def word_search(data):
     names = data[0]
     lines = data[1:]
-    first = []
     result = {}
     for name in names:
         first_letters = get_first_letters(name, lines)
@@ -28,6 +27,7 @@ def get_name_coordinates(all_combos, lines, name):
             coordinate.reverse()
             result[name] = coordinate
     return result
+
 
 def get_all_combos(first_letters, name):
     result = []
