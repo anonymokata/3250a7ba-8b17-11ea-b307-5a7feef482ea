@@ -4,7 +4,7 @@ from unittest import TestCase
 
 class TestWordSearch(TestCase):
 
-    def test_find_horizontally(self):
+    def test_find_scotty(self):
         new_data = self.data().copy()
         new_data.insert(0, ["SCOTTY"])
         result = word_search(new_data)
@@ -13,67 +13,61 @@ class TestWordSearch(TestCase):
         }
         assert result == expected
 
-    def test_find_horizontally_reversed(self):
+    def test_find_kirk(self):
         new_data = self.data().copy()
-        new_data.insert(0, ["SCOTTY", "KIRK"])
+        new_data.insert(0, ["KIRK"])
         result = word_search(new_data)
         expected = {
-            'SCOTTY': [(0, 5), (1, 5), (2, 5), (3, 5), (4, 5), (5, 5)],
             'KIRK': [(4, 7), (3, 7), (2, 7),(1, 7)],
         }
         assert result == expected
 
-    def test_find_horizontally_reversed(self):
+    def test_find_bones(self):
         new_data = self.data().copy()
-        new_data.insert(0, ["SCOTTY", "KIRK", "BONES"])
+        new_data.insert(0, ["BONES"])
         result = word_search(new_data)
         expected = {
-            'SCOTTY': [(0, 5), (1, 5), (2, 5), (3, 5), (4, 5), (5, 5)],
-            'KIRK': [(4, 7), (3, 7), (2, 7),(1, 7)],
             'BONES': [(0, 6),(0, 7),(0, 8),(0, 9),(0, 10)],
         }
         assert result == expected
 
     def test_find_khan(self):
         new_data = self.data().copy()
-        new_data.insert(0, ["SCOTTY", "KIRK", "BONES", "KHAN"])
+        new_data.insert(0, ["KHAN"])
         result = word_search(new_data)
         expected = {
-            'SCOTTY': [(0, 5), (1, 5), (2, 5), (3, 5), (4, 5), (5, 5)],
-            'KIRK': [(4, 7), (3, 7), (2, 7),(1, 7)],
-            'BONES': [(0, 6),(0, 7),(0, 8),(0, 9),(0, 10)],
             'KHAN': [(5, 9), (5, 8),(5, 7), (5, 6)],
         }
         assert result == expected
 
     def test_find_spock(self):
         new_data = self.data().copy()
-        new_data.insert(0, ["SCOTTY", "KIRK", "BONES", "KHAN", "SPOCK"])
+        new_data.insert(0, ["SPOCK"])
         result = word_search(new_data)
         expected = {
-            'SCOTTY': [(0, 5), (1, 5), (2, 5), (3, 5), (4, 5), (5, 5)],
-            'KIRK': [(4, 7), (3, 7), (2, 7),(1, 7)],
-            'BONES': [(0, 6),(0, 7),(0, 8),(0, 9),(0, 10)],
-            'KHAN': [(5, 9), (5, 8),(5, 7), (5, 6)],
             'SPOCK': [(2, 1), (3, 2), (4, 3), (5, 4), (6, 5)],
         }
         assert result == expected
 
     def test_find_uhura(self):
         new_data = self.data().copy()
-        new_data.insert(0, ["SCOTTY", "KIRK", "BONES", "KHAN", "SPOCK", "UHURA"])
+        new_data.insert(0, ["UHURA"])
         result = word_search(new_data)
         expected = {
-            'SCOTTY': [(0, 5), (1, 5), (2, 5), (3, 5), (4, 5), (5, 5)],
-            'KIRK': [(4, 7), (3, 7), (2, 7),(1, 7)],
-            'BONES': [(0, 6),(0, 7),(0, 8),(0, 9),(0, 10)],
-            'KHAN': [(5, 9), (5, 8),(5, 7), (5, 6)],
-            'SPOCK': [(2, 1), (3, 2), (4, 3), (5, 4), (6, 5)],
             'UHURA': [(4, 0), (3, 1), (2, 2), (1, 3), (0, 4)],
         }
         assert result == expected
 
     def test_find_sulu(self):
+        new_data = self.data().copy()
+        new_data.insert(0, ["SULU"])
+        result = word_search(new_data)
+        expected = {
+            'SULU': [(3, 3), (2, 2), (1, 1), (0, 0)],
+        }
+        assert result == expected
+
+    def test_find_all(self):
         new_data = self.data().copy()
         new_data.insert(0, ["SCOTTY", "KIRK", "BONES", "KHAN", "SPOCK", "UHURA", "SULU"])
         result = word_search(new_data)
