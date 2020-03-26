@@ -88,7 +88,7 @@ class TestWordSearch(TestCase):
         new_data.insert(0, ['BONES', 'KHAN', 'KIRK', 'SCOTTY', 'SPOCK', 'SULU', 'UHURA'])
         self.assertCountEqual(lines, new_data)
 
-    def test_find_reverse_riker(self):
+    def test_find_when_only_one_name_in_the_list(self):
         new_data = [
             ['X', 'X', 'X', 'X', 'X', 'X', 'X'],
             ['X', 'X', 'R', 'X', 'X', 'X', 'X'],
@@ -112,8 +112,28 @@ class TestWordSearch(TestCase):
         }
         assert result == expected
 
-    def names(self):
-        return ["BONES", "KHAN", "KIRK", "SCOTTY", "SPOCK", "SULU", "UHURA"]
+    def test_no_names_present(self):
+        new_data = [
+            ['X', 'X', 'X', 'X', 'X', 'X', 'X'],
+            ['X', 'X', 'R', 'X', 'X', 'X', 'X'],
+            ['X', 'X', 'X', 'E', 'X', 'X', 'X'],
+            ['X', 'X', 'X', 'X', 'K', 'X', 'X'],
+            ['X', 'X', 'X', 'X', 'X', 'I', 'X'],
+            ['X', 'X', 'X', 'X', 'X', 'X', 'R'],
+            ['X', 'X', 'X', 'X', 'X', 'X', 'X'],
+            ['X', 'X', 'X', 'X', 'X', 'X', 'X'],
+        ]
+        new_data.insert(0, ["SCOTTY", "KIRK", "BONES", "KHAN", "SPOCK", "UHURA"])
+        result = word_search(new_data)
+        expected = {
+            'SCOTTY': [],
+            'KIRK': [],
+            'BONES': [],
+            'KHAN': [],
+            'SPOCK': [],
+            'UHURA': [],
+        }
+        assert result == expected
 
     def data(self):
         return [

@@ -9,20 +9,25 @@ def get_lines(file_name):
 
 def word_search(data):
     names = data[0]
-    result = {name: [] for name in names}
     lines = data[1:]
     first = []
+    result = {}
     for name in names:
         first_letters = get_first_letters(name, lines)
         all_combos = get_all_combos(first_letters, name)
-        for coordinate in all_combos:
-            if name in _get_word(coordinate, lines, name):
-                result[name] = coordinate
-            if name[::-1] in _get_word(coordinate, lines, name):
-                coordinate.reverse()
-                result[name] = coordinate
+        result.update(get_name_coordinates(all_combos, lines, name))
     return result
 
+
+def get_name_coordinates(all_combos, lines, name):
+    result = {name: []}
+    for coordinate in all_combos:
+        if name in _get_word(coordinate, lines, name):
+            result[name] = coordinate
+        if name[::-1] in _get_word(coordinate, lines, name):
+            coordinate.reverse()
+            result[name] = coordinate
+    return result
 
 def get_all_combos(first_letters, name):
     result = []
