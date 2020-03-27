@@ -42,5 +42,5 @@ My original attempt involved checking each list of strings, then creating a new 
 
 The real breakthrough happened when I realized that for each letter that is the first letter of the name you're searching for there are only at most 8 legitimate sets of coordinates. So instead of constructing entires lists and trying to derive coordinates, I only needed the coordinates of the first letters, and the coordinate from there could very easily be calculated by just adding by the length of the name in the eight cardinal directions.
 
-Invalid coordinates were ignored. I don't know how efficient it is, or how well this solution would scale. I think it is a pretty elegant solution.
+Invalid coordinates were ignored. I don't know how efficient it is, or how well this solution would scale. I think it is a pretty elegant solution. Being able to leverage the tests I wrote for the original solution proved to be very helpful and provided a lot of confidence when both when I was writing the new solution and when I was refactoring.
 
