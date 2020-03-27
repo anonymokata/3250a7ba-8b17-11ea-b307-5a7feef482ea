@@ -31,8 +31,8 @@ You would get this result:
 
 ```
 # Use
--create a virtualenv with python 3.6.4
--pip install the requirements file
--run this command: `python word_search.py --filename [file name]`
+- create a virtualenv with python 3.6.4
+- pip install the requirements file
+- run this command: `python word_search.py --filename [file name]`
 
 
