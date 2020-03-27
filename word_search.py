@@ -1,3 +1,5 @@
+from argparse import ArgumentParser
+
 
 def get_lines(file_name):
     lines = []
@@ -67,3 +69,13 @@ def _get_word(coords, lines, name):
             except IndexError:
                 pass
         return ''.join(result)
+
+
+if __name__ == "__main__":
+    parser = ArgumentParser()
+    parser.add_argument("--filename", required=True)
+    args = parser.parse_args()
+    lines = get_lines(args.filename)
+    result = word_search(lines)
+    for key, value in result.items():
+        print("{}: {}".format(key, value))
