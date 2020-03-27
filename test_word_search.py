@@ -135,7 +135,7 @@ class TestWordSearch(TestCase):
         }
         assert result == expected
 
-    def test_new_puzzle(self):
+    def test_alternative_data(self):
         names = [
             "CAT",
             "DOG",
