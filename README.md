@@ -37,3 +37,10 @@ You would get this result:
 - run this command: `python word_search.py --filename [file name]`
 
 
+# Notes
+My original attempt involved checking each list of strings, then creating a new stack of lists by rotating the data ninety degrees. Then I ended up using a `numpy` method to create stack of lists for the diagonals, and then yet another stack for the other diagonals. Calculating coordinates turned out be a very complex task and stalled me for a while.
+
+The real breakthrough happened when I realized that for each letter that is the first letter of the name you're search for there are only at most 8 legitimate sets of coordinates. So instead of constructing entires lists and trying to derive coordinates, I only needed the coordinates of the first letters, and the coordinate from there could very easily be calculated by just adding by the length of the name in the eight cardinal directions.
+
+Invalid coordinates were ignored. I don't know how efficient it is, or how well this solution would scale. I think it is a pretty elegant solution.
+
