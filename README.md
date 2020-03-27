@@ -44,3 +44,35 @@ The real breakthrough happened when I realized that for each letter that is the 
 
 Invalid coordinates were ignored. I don't know how efficient it is, or how well this solution would scale. I think it is a pretty elegant solution. Being able to leverage the tests I wrote for the original solution proved to be very helpful and provided a lot of confidence when both when I was writing the new solution and when I was refactoring.
 
+
+# Improvement
+One obvious place for refactoring is this method:
+```
+def get_eight_viable_answers(letter, name):
+    result = []
+    result.append([(letter[0], letter[1] + i) for i in range(len(name))])
+    result.append([(letter[0], letter[1] - i) for i in range(len(name))])
+    result.append([(letter[0] + i, letter[1]) for i in range(len(name))])
+    result.append([(letter[0] - i, letter[1]) for i in range(len(name))])
+    result.append([(letter[0] + i, letter[1] + i) for i in range(len(name))])
+    result.append([(letter[0] + i, letter[1] - i) for i in range(len(name))])
+    result.append([(letter[0] - i, letter[1] + i) for i in range(len(name))])
+    result.append([(letter[0] - i, letter[1] - i) for i in range(len(name))])
+    return result
+```
+It seems like a pretty good candidate for DRY refactoring. However I have yet to figure out a good way to refactor this.
+
+Another place for improvement is this method:
+```
+def _get_word(coords, lines, name):
+    result = []
+    if len(coords) == len(name):
+        for coord in coords:
+            try:
+                result.append(lines[coord[1]][coord[0]])
+            except IndexError:
+                pass
+        return ''.join(result)
+
+```
+I am not sure if it's best to go foward with just catching and handling the `IndexError` or just check against the boundary conditions to avoid the error entirely. The advantage of the exception handling is that it removes the opportunity for errors when figuring out the boundaries. One potential downside is it's possible that the wrong errors might end up failing silently.
